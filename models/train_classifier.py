@@ -17,10 +17,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.svm import LinearSVC
-#from sklearn.externals import joblib
 import pickle
 import warnings
 warnings.filterwarnings("ignore")
+
 #lemmatize and remove stop words
 lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
@@ -75,32 +75,35 @@ def build_model():
     # n_jobs = -1 will deploy all the cores available in CPU for processing which may stop the execution in between.
     # n_jobs value more than 1 in local machine also leads to error saying "indices and data should have the same size""
     # check https://joblib.readthedocs.io/en/latest/parallel.html#joblib.parallel_backend for more details
+    #I have selectef min_df as 2% and max_df as 80% based on some empirical findings over internet
     pipeline_rf = Pipeline([
-        ('vect', CountVectorizer(tokenizer=tokenize, max_df=0.75)),
+        ('vect', CountVectorizer(tokenizer=tokenize, min_df = 0.02, max_df=0.80)),
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(estimator=RandomForestClassifier(),n_jobs = -1))
     ])
 
     parameters_rf = {
-        'vect__max_df': (0.5,0.75),
-        'clf__estimator__n_estimators': [25,50]
+        #'vect__max_df': (0.5,0.80), # not required
+        'clf__estimator__n_estimators': [50,75],
+        #'clf__estimator__estimator__oob_score': [True],
+        #'clf__estimator__estimator__min_samples_leaf': [50]
     }
 
     # Below code builds a pipline for OneVsRestClassifier
     # Replace corresponding calling parmeters in GridSearchCV function call below to build model using it
     pipeline_one_vs_rest  = Pipeline([
-        ('vect', CountVectorizer(tokenizer=tokenize, max_df=0.75)),
+        ('vect', CountVectorizer(tokenizer=tokenize, min_df = 0.02, max_df=0.80)),
         ('tfidf', TfidfTransformer()),
-        ('clf', MultiOutputClassifier(OneVsRestClassifier(LinearSVC(random_state = 0)), n_jobs = -1))
+        ('clf', MultiOutputClassifier(OneVsRestClassifier(LinearSVC(random_state = 5)), n_jobs = -1)) #any random state
     ])
 
     parameters_one_vs_rest = {
-        'vect__max_df': (0.5,0.75),
+        #'vect__max_df': (0.5,0.80),
         'tfidf__smooth_idf':[True, False],
-        'clf__estimator__estimator__C': [1, 2, 5]
+        'clf__estimator__estimator__C': [1, 2, 5, 8]
     }
 
-    cv = GridSearchCV(pipeline_rf, param_grid= parameters_rf, n_jobs= -1, verbose=2)
+    cv = GridSearchCV(pipeline_rf, param_grid= parameters_rf, n_jobs= -1, verbose=3)
     return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
@@ -121,18 +124,13 @@ def evaluate_model(model, X_test, Y_test, category_names):
     Y_test_df.fillna(0,inplace=True)
     Y_test_df = Y_test_df.applymap(lambda x:int(x))
 
-    '''print(classification_report(Y_test, Y_pred, target_names = category_names))
-       print('---------------------------------')
-       for i in range(Y_test.shape[1]):
-           print('%25s accuracy : %.2f' %(category_names[i], accuracy_score(Y_test[:,i], Y_pred[:,i])))'''
+    for category in category_names:
 
-    # for each category
-    for column in category_names:
-        # show f1_score,precision,recall
-        curr_f1_report = classification_report(Y_test_df[[column]],Y_pred_df[[column]])
-        print("*"*80)
-        print("F1 score table for '%s' column:\n" %column)
-        print(curr_f1_report)
+        #Model Evaluation
+        evaluation = classification_report(Y_test_df[[category]],Y_pred_df[[category]])
+        print("-"*100)
+        print("F1 score for '%s' category:\n" %category)
+        print(evaluation)
 
 
 def save_model(model, model_filepath):
@@ -146,6 +144,9 @@ def save_model(model, model_filepath):
     pickle.dump(model,model_pickle_file)
 
 def main():
+    '''
+    standard templated provided by Udacity
+    '''
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
