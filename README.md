@@ -2,10 +2,8 @@
 - scikit-learn == 0.22.2.post1
 - nltk == 3.4.5
 - Flask == 1.1.2
-- gunicorn == 19.9.0
 - plotly == 4.6.0
 - SQLAlchemy == 1.3.16
-- jsonschema == 3.2.0
 - numpy == 1.18.2      
 - pandas == 1.0.3
 
@@ -24,7 +22,8 @@ It aims to classify each message to the correct target category. The idea is to 
 > * **data/DisasterResponse.db:** database that stores cleaned data
 > * **models/train_classifier.py:** ML pipeline that trains classifier and saves model
 > * **models/classifier.pkl:** a pickle file which saves model
-> * **models/Evaluation.md:** Results of model evaluation on my local machine (RandomForestClassifier)
+> * **models/Evaluation_Linear_SVC.md:** Results of Linear SVC model evaluation on my local machine
+> * **models/Evaluation_Random_Forest.md:** Results of RandomForestClassifier model evaluation on my local machine
 > * **app/:** a Flask framework for presenting data
 
 ## 4. Project Structure
