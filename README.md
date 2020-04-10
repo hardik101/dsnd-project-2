@@ -25,7 +25,7 @@ It aims to classify each message to the correct target category. The idea is to 
 > * **models/train_classifier.py:** ML pipeline that trains classifier and saves model
 > * **models/classifier.pkl:** a pickle file which saves model
 > * **models/Evaluation.md:** Results of model evaluation on my local machine (RandomForestClassifier)
-> * **data/:** a Flask framework for presenting data
+> * **app/:** a Flask framework for presenting data
 
 ## 4. Project Structure
 - \
@@ -61,7 +61,7 @@ It aims to classify each message to the correct target category. The idea is to 
      3. Go to http://0.0.0.0:3001/
 
 ## 6. GitHub Repo:
-   - https://github.com/
+   - https://github.com/hardik101/dsnd-project-2
 
 ## 7. Licensing, Author, Acknowledgements
 This work is licensed under a [Creative Commons  Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/). Please refer to [Udacity Terms of Service](https://www.udacity.com/legal) for further information.
