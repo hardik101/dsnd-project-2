@@ -11,7 +11,6 @@ from plotly.graph_objs import Bar
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
 
-
 app = Flask(__name__)
 
 def tokenize(text):
@@ -26,14 +25,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-df = pd.read_sql_table('YourTableName', engine)
-
-# load data
-engine = create_engine('sqlite:///../data/DisasterResponse.db')
+engine = create_engine('sqlite:///'+ 'data/DisasterResponse.db') # works with this URI on Macbook
 df = pd.read_sql_table('DisasterResponse', engine)
 
 # load model
-model = joblib.load("../models/classifier.pkl")
+model = joblib.load("models/classifier.pkl") #works with this URI on Macbook
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')

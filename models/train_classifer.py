@@ -36,7 +36,7 @@ def load_data(database_filepath):
     Y: Dataframe which includes categories
     categoy_names: List of categories
     '''
-    engine = create_engine('sqlite:///'+database_filepath)
+    engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql(sql='select * from DisasterResponse',con=engine)
     X = df.message.values
     Y = df.iloc[:,3:]
@@ -153,16 +153,16 @@ def main():
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
         print('Building model...')
-        model = build_model()
+        #model = build_model()
 
         print('Training model...')
-        model.fit(X_train, Y_train)
+        #model.fit(X_train, Y_train)
 
         print('Evaluating model...')
-        evaluate_model(model, X_test, Y_test, category_names)
+        #evaluate_model(model, X_test, Y_test, category_names)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
-        save_model(model, model_filepath)
+        #save_model(model, model_filepath)
 
         print('Trained model saved!')
 
