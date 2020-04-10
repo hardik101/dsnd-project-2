@@ -127,3 +127,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#Mac
+*.DS_Store
+
+# Windows:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.bat
+
+#pickle file
+*.pkl
