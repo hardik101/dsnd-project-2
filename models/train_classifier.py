@@ -129,7 +129,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
         #Model Evaluation
         evaluation = classification_report(Y_test_df[[category]],Y_pred_df[[category]])
         print("-"*100)
-        print("F1 score for '%s' category:\n" %category)
+        print("Evaluation for '%s' category:\n" %category)
         print(evaluation)
 
 
