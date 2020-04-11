@@ -63,13 +63,10 @@ It aims to classify each message to the correct target category. The idea is to 
    - https://github.com/hardik101/dsnd-project-2
 
 ## 7. Web Application Screenshots:
+	
+      ![Home Page](https://postimg.cc/KKst9dk3)
 
-	 ![Home Page](Flask_app_1.png)
-
-
-	 
-
-	 ![Search Results](Flask_app_2.png)
+      ![Search Results](https://postimg.cc/2qHs8F3N)
 
 ## 8. Licensing, Author, Acknowledgements
 This work is licensed under a [Creative Commons  Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/). Please refer to [Udacity Terms of Service](https://www.udacity.com/legal) for further information.
