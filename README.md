@@ -24,7 +24,7 @@ It aims to classify each message to the correct target category. The idea is to 
 > * **models/classifier.pkl:** a pickle file which saves model
 > * **models/Evaluation_Linear_SVC.md:** Results of Linear SVC model evaluation on my local machine
 > * **models/Evaluation_Random_Forest.md:** Results of RandomForestClassifier model evaluation on my local machine
-> * **app/:** a Flask framework for presenting data
+> * **app/:** a Flask framework for presenting data (two screenshots shows correct working connection string in app/run.py file)
 
 ## 4. Project Structure
 - \
@@ -62,7 +62,13 @@ It aims to classify each message to the correct target category. The idea is to 
 ## 6. GitHub Repo:
    - https://github.com/hardik101/dsnd-project-2
 
-## 7. Licensing, Author, Acknowledgements
+## 7. Web Application Screenshots:
+
+	 1.![Home Page](./Flask_app_1.png)
+
+	 2.![Search Results](./Flask_app_2.png)
+
+## 8. Licensing, Author, Acknowledgements
 This work is licensed under a [Creative Commons  Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/). Please refer to [Udacity Terms of Service](https://www.udacity.com/legal) for further information.
 
 Signed-off by : Hardik B.

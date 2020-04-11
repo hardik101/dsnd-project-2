@@ -28,11 +28,14 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///'+ 'data/DisasterResponse.db') # works with this URI on Macbook
+#change relative URI to 'sqlite:///'+ 'data/DisasterResponse.db' if running on Macbook
+#Please refer to https://docs.sqlalchemy.org/en/13/core/engines.html#sqlite for more details
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('DisasterResponse', engine)
 
-# load model
-model = joblib.load("models/classifier.pkl") #works with this URI on Macbook
+#load model
+#change URI to 'sqlite:///'+ 'data/DisasterResponse.db' if running on Macbook
+model = joblib.load("../models/classifier.pkl") #works with this URI on Macbook
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
